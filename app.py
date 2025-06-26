@@ -77,9 +77,24 @@ def calculate_splits(expenses):
 # === App UI ===
 st.title("🏠 Roommate Expense Tracker")
 
+NAMES = ["Sai varnith", "Pavan", "Aryan", "Sai Deekshith", "Mukhesh Kumar", "Rohan Aditya"]
+
 expenses, sha = load_expenses()
 
-NAMES = ["Sai varnith", "Pavan", "Aryan", "Sai Deekshith", "Mukhesh Kumar", "Rohan Aditya"]
+# === Reset Button ===
+with st.expander("⚠️ Admin Options"):
+    if st.button("🔁 Reset All Expenses"):
+        if st.confirm("Are you sure you want to clear all expense records?"):
+            expenses = []
+            save_expenses(expenses, sha)
+            st.success("All expenses have been cleared.")
+            st.stop()
+
+# If file is newly created, prefill with zero entries
+if not expenses:
+    expenses = [{"name": n, "amount": 0, "reason": "Initial", "date": str(datetime.today().date())} for n in NAMES]
+    save_expenses(expenses, sha)
+    st.success("Initialized with default zero entries.")
 
 with st.form("expense_form"):
     name = st.selectbox("Name", NAMES)
