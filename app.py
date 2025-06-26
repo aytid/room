@@ -25,10 +25,12 @@ def load_expenses():
         content = base64.b64decode(data["content"]).decode("utf-8")
         return json.loads(content), data["sha"]
     elif r.status_code == 404:
-        return [], None
-    else:
-        st.error("Error loading expenses from GitHub.")
+        st.error("❌ File not found. Check if `expenses.json` exists in your repo.")
         st.stop()
+    else:
+        st.error(f"❌ GitHub API error: {r.status_code} — {r.text}")
+        st.stop()
+
 
 # === Save Expenses to GitHub ===
 def save_expenses(expenses, sha=None):
