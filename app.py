@@ -90,12 +90,6 @@ with st.expander("⚠️ Admin Options"):
             st.success("All expenses have been cleared.")
             st.stop()
 
-# If file is newly created, prefill with zero entries
-if not expenses:
-    expenses = [{"name": n, "amount": 0, "reason": "Initial", "date": str(datetime.today().date())} for n in NAMES]
-    save_expenses(expenses, sha)
-    st.success("Initialized with default zero entries.")
-
 with st.form("expense_form"):
     name = st.selectbox("Name", NAMES)
     amount = st.number_input("Amount Spent (₹)", min_value=0.0, step=1.0)
