@@ -81,6 +81,14 @@ NAMES = ["Sai varnith", "Pavan", "Aryan", "Sai Deekshith", "Mukhesh Kumar", "Roh
 
 expenses, sha = load_expenses()
 
+# === Reset Button ===
+if st.button("🔁 Reset All Expenses"):
+    if st.confirm("Are you sure you want to clear all expense records?"):
+        expenses = []
+        save_expenses(expenses, sha)
+        st.success("All expenses have been cleared.")
+        st.stop()
+
 with st.form("expense_form"):
     name = st.selectbox("Name", NAMES)
     amount = st.number_input("Amount Spent (₹)", min_value=0.0, step=1.0)
@@ -106,31 +114,17 @@ else:
         df["amount"] = df["amount"].astype(float)
         df["date"] = pd.to_datetime(df["date"])
 
-        for i, row in df.iterrows():
+        for _, row in df.iterrows():
             st.markdown(f"**{row['name']}** spent ₹{row['amount']} on _{row['reason']}_ at {row['date'].date()}")
-            col1, col2 = st.columns([1, 1])
-            if col1.button("✏️ Edit", key=f"edit_{i}"):
-                st.session_state["edit_index"] = i
-            if col2.button("🗑 Delete", key=f"delete_{i}"):
-                expenses.pop(i)
-                save_expenses(expenses, sha)
-                st.success("Expense deleted.")
-                st.experimental_rerun()
 
         total = df["amount"].sum()
-        st.markdown(f"**Total Expense: ₹{total}**")
+        st.markdown(f"**Total Expense (Filtered): ₹{total}**")
     else:
         st.info("No matching expenses found.")
 
-    # === Reset Button ===
-if st.button("🔁 Reset All Expenses"):
-    if st.confirm("Are you sure you want to clear all expense records?"):
-        expenses = []
-        save_expenses(expenses, sha)
-        st.success("All expenses have been cleared.")
-        st.stop()
+    total_room_expense = pd.DataFrame(expenses)["amount"].astype(float).sum()
+    st.markdown(f"### 🧾 Total Room Expense: ₹{total_room_expense}")
 
-    
     # === Charts ===
     st.subheader("📊 Expense Chart")
     chart_df = pd.DataFrame(filtered)
