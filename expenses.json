@@ -10,5 +10,11 @@
     "amount": 20.0,
     "reason": "Water can",
     "date": "2025-06-27"
+  },
+  {
+    "name": "Aryan",
+    "amount": 20.0,
+    "reason": "Water can",
+    "date": "2025-06-28"
   }
 ]
