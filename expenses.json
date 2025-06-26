@@ -34,5 +34,11 @@
     "amount": 0,
     "reason": "Initial",
     "date": "2025-06-26"
+  },
+  {
+    "name": "Sai Deekshith",
+    "amount": 10.0,
+    "reason": "curd",
+    "date": "2025-06-26"
   }
 ]
