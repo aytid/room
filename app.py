@@ -81,14 +81,6 @@ NAMES = ["Sai varnith", "Pavan", "Aryan", "Sai Deekshith", "Mukhesh Kumar", "Roh
 
 expenses, sha = load_expenses()
 
-# === Reset Button ===
-if st.button("🔁 Reset All Expenses"):
-    if st.confirm("Are you sure you want to clear all expense records?"):
-        expenses = []
-        save_expenses(expenses, sha)
-        st.success("All expenses have been cleared.")
-        st.stop()
-
 with st.form("expense_form"):
     name = st.selectbox("Name", NAMES)
     amount = st.number_input("Amount Spent (₹)", min_value=0.0, step=1.0)
@@ -130,6 +122,15 @@ else:
     else:
         st.info("No matching expenses found.")
 
+    # === Reset Button ===
+if st.button("🔁 Reset All Expenses"):
+    if st.confirm("Are you sure you want to clear all expense records?"):
+        expenses = []
+        save_expenses(expenses, sha)
+        st.success("All expenses have been cleared.")
+        st.stop()
+
+    
     # === Charts ===
     st.subheader("📊 Expense Chart")
     chart_df = pd.DataFrame(filtered)
