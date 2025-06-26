@@ -34,5 +34,11 @@
     "amount": 0,
     "reason": "Initial",
     "date": "2025-06-26"
+  },
+  {
+    "name": "Sai varnith",
+    "amount": 100.0,
+    "reason": "Eggs",
+    "date": "2025-06-26"
   }
 ]
