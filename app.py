@@ -11,7 +11,7 @@ GITHUB_TOKEN = st.secrets["GITHUB_TOKEN"]
 
 # === GitHub API Headers ===
 headers = {
-    "Authorization": f"token {GITHUB_TOKEN}",
+    "Authorization": f"Bearer {GITHUB_TOKEN}",
     "Accept": "application/vnd.github.v3+json"
 }
 
