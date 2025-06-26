@@ -3,5 +3,10 @@
     "name": "Rohan",
     "amount": 20.0,
     "reason": "Water Can"
+  },
+  {
+    "name": "Aryan",
+    "amount": 90.0,
+    "reason": "Eggs+Curd"
   }
 ]
