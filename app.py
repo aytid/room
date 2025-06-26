@@ -49,6 +49,8 @@ def save_expenses(expenses, sha=None):
 
 # === Split Logic ===
 def calculate_splits(expenses):
+    if not expenses:
+        return ["No expenses yet to calculate split."]
     totals = defaultdict(float)
     for e in expenses:
         totals[e["name"]] += float(e["amount"])
@@ -93,24 +95,26 @@ with st.form("expense_form"):
 
 # === Filters ===
 st.subheader("📄 All Expenses")
-filter_name = st.selectbox("Filter by person", ["All"] + NAMES)
-
-filtered = [e for e in expenses if filter_name == "All" or e["name"] == filter_name]
-
-if filtered:
-    df = pd.DataFrame(filtered)
-    df["amount"] = df["amount"].astype(float)
-    df["date"] = pd.to_datetime(df["date"])
-    st.dataframe(df.sort_values(by="date", ascending=False))
+if not expenses:
+    st.info("No expenses yet. Add your first expense above!")
 else:
-    st.info("No matching expenses found.")
+    filter_name = st.selectbox("Filter by person", ["All"] + NAMES)
+    filtered = [e for e in expenses if filter_name == "All" or e["name"] == filter_name]
 
-# === Charts ===
-st.subheader("📊 Expense Chart")
-chart_df = pd.DataFrame(filtered)
-if not chart_df.empty:
-    chart_data = chart_df.groupby("name")["amount"].sum().reset_index()
-    st.bar_chart(chart_data.set_index("name"))
+    if filtered:
+        df = pd.DataFrame(filtered)
+        df["amount"] = df["amount"].astype(float)
+        df["date"] = pd.to_datetime(df["date"])
+        st.dataframe(df.sort_values(by="date", ascending=False))
+    else:
+        st.info("No matching expenses found.")
+
+    # === Charts ===
+    st.subheader("📊 Expense Chart")
+    chart_df = pd.DataFrame(filtered)
+    if not chart_df.empty:
+        chart_data = chart_df.groupby("name")["amount"].sum().reset_index()
+        st.bar_chart(chart_data.set_index("name"))
 
 # === Split View ===
 st.subheader("📤 Split Summary")
