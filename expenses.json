@@ -18,5 +18,11 @@
     "name": "varnith",
     "amount": 200.0,
     "reason": "bj"
+  },
+  {
+    "name": "Rohan Aditya",
+    "amount": 1000.0,
+    "reason": "Beds",
+    "date": "2025-06-26"
   }
 ]
