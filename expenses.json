@@ -8,5 +8,10 @@
     "name": "Aryan",
     "amount": 90.0,
     "reason": "Eggs+Curd"
+  },
+  {
+    "name": "Pavan ",
+    "amount": 120.0,
+    "reason": "Ice cream "
   }
 ]
