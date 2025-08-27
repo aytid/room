@@ -4,5 +4,11 @@
     "amount": 6.0,
     "reason": "S",
     "date": "2025-08-27"
+  },
+  {
+    "name": "Sai varnith",
+    "amount": 2000.0,
+    "reason": "Food",
+    "date": "2025-08-27"
   }
 ]
